@@ -29,7 +29,7 @@ class MessageCreateReceive {
         const commands = this.client.commands.get(cmd) || this.client.commands.get(this.client.aliases.get(cmd))
         if (!commands) return
         message.channel.sendTyping()
-        if (commands.config.devs && !this.client.config.owners.includes(message.author.id)) return message.channel.createMessage("Only my developers can use this command.")
+        if (commands.config.devs && !this.client.config.owners.includes(message.author.id)) return message.reply("chino_shock", t("permissions:ONLY_DEVS"))
         // if (commands.config.UserPermission !== null) {
         //     if (!message.member.hasPermission(commands.config.UserPerms)) {
         //         let perm = commands.config.UserPerms.map(value => t(`permissions:${value}`)).join(", ")

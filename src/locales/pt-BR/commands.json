@@ -1,0 +1,8 @@
+{
+    "ping": "Total de shards: {{totalShard}}",
+    "reload": {
+        "locales": "locales recarregadas com sucesso!",
+        "args-null": "opções disponíveis : {{list}}",
+        "shard": "shard `{{shard}}` reiniciada com sucesso."
+    }
+}

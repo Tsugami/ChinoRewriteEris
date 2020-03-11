@@ -1,4 +1,5 @@
 const Command = require("../../structures/Commands")
+const { RichEmbed } = require("chariot.js")
 class EvalCommand extends Command {
     constructor(client) {
         super(client, {
@@ -20,7 +21,14 @@ class EvalCommand extends Command {
             evaled = `\`\`\`js\n${evaled}\`\`\``
             message.channel.createMessage(evaled)
         } catch (err) {
-            console.log(err)
+            if (err.stack.length > 1800)`${err.stack.slice(0, 1800)}...`
+            const embed = new RichEmbed()
+            embed.setColor(this.client.colors.error)
+            embed.setTitle(t("events:error.title"))
+            embed.setDescription(`\`\`\`${err.stack}\`\`\``)
+            embed.addField(t("events:error.report-issue"), t("events:error.server-support"))
+
+            message.sendEmbed(embed)
         }
     }
 }

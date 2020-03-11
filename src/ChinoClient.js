@@ -33,6 +33,7 @@ class ChinoClient extends ErisClient {
                     cmd.forEach(cmd => {
                         const Command = require(`${__dirname}/commands/${category}/${cmd}`)
                         const commands = new Command(this)
+                        commands.dir = `${__dirname}/commands/${category}/${cmd}`
                         this.commands.set(commands.config.name, commands)
                         commands.config.aliases.forEach(alias => this.aliases.set(alias, commands.config.name))
                     })

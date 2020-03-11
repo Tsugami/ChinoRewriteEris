@@ -14,13 +14,18 @@ class PingCommand extends Command {
             case "shards":
                 let s = []
                 const embed = new RichEmbed()
-                embed.setFooter(`Total shards: ${this.client.shards.size}`)
+                embed.setFooter(t("commands:ping", { totalShard: this.client.shards.size }))
                 embed.setColor(this.client.colors.default)
                 this.client.shards.forEach(shard => {
-                    s.push(embed.addField(`Shard: ${shard.id}`, `Ping: ${shard.latency}\nStatus: ${shard.status}`, true))
+                    let shardStatus
+                    if (shard.status === "ready") shardStatus = "CONNECTED"
+                    if (shard.status === "disconnected") shardStatus = "DISCONNECTED"
+                    if (shard.status === "connecting") shardStatus = "CONNECTING"
+                    if (shard.status === "handshaking") shardStatus = "HANDSHAKING"
+                    s.push(embed.addField(`Shard: ${shard.id}`, `Ping: ${shard.latency} | ${shardStatus}`, true))
                 })
 
-                message.channel.createMessage({embed: embed})
+                message.sendEmbed(embed)
                 break
             default:
                 let ping = `Ping: \`${Math.round(message.channel.guild.shard.latency)}\`ms! | API Latency: \`${Date.now() - message.timestamp}\` | Shard: [${message.channel.guild.shard.id}/${this.client.shards.size}]`

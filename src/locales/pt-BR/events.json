@@ -1,3 +1,8 @@
 {
-    "mention": "Olá, meu prefix neste servidor é `{{prefix}}`, caso queira saber o que eu posso fazer, use `{{prefix}}ajuda`."
+    "mention": "Olá, meu prefix neste servidor é `{{prefix}}`, caso queira saber o que eu posso fazer, use `{{prefix}}ajuda`.",
+    "error": {
+        "title": "Ocorreu um erro inesperadamente inesperado, gomenasai.",
+        "report-issue": "Relate o problema",
+        "server-support": "Você pode relatar este problema entrando no meu [servidor de suporte](https://discord.gg/CAm9cSU), me desculpe pelo ocorrido. <:chino_upset:682017961149464645>"
+    }
 }

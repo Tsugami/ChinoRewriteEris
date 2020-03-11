@@ -7,7 +7,7 @@ class Commands {
             category: options.category || null,
             UserPerms: options.UserPerms || null,
             ClientPerms: options.ClientPerms || null,
-            devs: options.devs || null
+            devs: options.devs || false
         }
     }
 }

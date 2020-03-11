@@ -1,7 +1,7 @@
 {
-    "default": "#6b8dff",
+    "default": "#6585FF",
     "mine": "#00d600",
-    "error": "#9b0000",
+    "error": "#ff1900",
     "action": "#0025cc",
     "moderation": "#c1001d"
 }

@@ -19,12 +19,13 @@ class LavalinkManager {
     }
 
     getBestHost() {
-        // return this.manager.nodes.array()[Math.floor(Math.random() * nodes.length)]
-        return console.log(this.manager.nodes)
+        let randomNode = nodes[Math.floor(Math.random() * nodes.length)] - 1
+        console.log(randomNode)
+        return this.manager.nodes.get(nodes[0].host)
     }
 
     async join(channel, guild) {
-        return new LavalinkPlayer(await this.manager.join({ channel: channel, guild: this.client.guilds.get(guild).id, host: this.getBestHost().host }, { selfdeaf: false }))
+        return new LavalinkPlayer(await this.manager.join(this.client.guilds.get(guild).id, channel))
     }
 }
 
