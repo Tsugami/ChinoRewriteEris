@@ -6,9 +6,18 @@ class ChinoClient extends ErisClient {
         super(token, options)
         this.aliases = new Collection()
         this.commands = new Collection()
+        this.colors = require("./structures/ChinoColors")
         this.config = require("../config")
+        this.database = require("./structures/MongooseDatabase")
+        this.player = new Collection()
     }
 
+    loadLavalink(query) {
+        const Lavalink = require("./structures/InicializeLavalink")
+        const lavalink = new Lavalink(query)
+        lavalink.load()
+        console.log("Loaded lavalink!")
+    }
     loadLocales() {
         const Locales = require("./structures/LocaleStructure")
         const locales = new Locales(this)
@@ -25,7 +34,7 @@ class ChinoClient extends ErisClient {
                         const Command = require(`${__dirname}/commands/${category}/${cmd}`)
                         const commands = new Command(this)
                         this.commands.set(commands.config.name, commands)
-                        commands.config.aliases.forEach(alias => this.client.aliases.set(alias, commands.config.name))
+                        commands.config.aliases.forEach(alias => this.aliases.set(alias, commands.config.name))
                     })
                 })
             })

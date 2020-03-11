@@ -12,7 +12,7 @@ class LocaleStructure {
     load() {
         try {
             this.startLocales()
-            console.log("Locales carregadas!")
+            console.log("Locales loaded!")
             return true
         } catch (err) {
             console.error(err)
