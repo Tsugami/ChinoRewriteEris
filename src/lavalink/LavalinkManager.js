@@ -19,8 +19,6 @@ class LavalinkManager {
     }
 
     getBestHost() {
-        let randomNode = nodes[Math.floor(Math.random() * nodes.length)] - 1
-        console.log(randomNode)
         return this.manager.nodes.get(nodes[0].host)
     }
 

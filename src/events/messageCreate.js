@@ -1,4 +1,5 @@
 const i18next = require("i18next")
+const { RichEmbed } = require("chariot.js")
 class MessageCreateReceive {
     constructor(client) {
         this.client = client
@@ -42,7 +43,16 @@ class MessageCreateReceive {
         //         return message.chinoReply("error", `${t("permissions:CLIENT_MISSING_PERMISSION", { perm: perm })}`)
         //     }
         // }
-        commands.run(message, args, server, { t })
+        commands.run(message, args, server, { t }).catch(err => {
+            if (err.stack.length > 1800)`${err.stack.slice(0, 1800)}...`
+            const embed = new RichEmbed()
+            embed.setColor(this.client.colors.error)
+            embed.setTitle(t("events:error.title"))
+            embed.setDescription(`\`\`\`js\n${err.stack}\`\`\``)
+            embed.addField(t("events:error.report-issue"), t("events:error.server-support"))
+
+            message.sendEmbed(embed)
+        })
     }
 }
 

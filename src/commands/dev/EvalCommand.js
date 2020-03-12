@@ -25,7 +25,7 @@ class EvalCommand extends Command {
             const embed = new RichEmbed()
             embed.setColor(this.client.colors.error)
             embed.setTitle(t("events:error.title"))
-            embed.setDescription(`\`\`\`${err.stack}\`\`\``)
+            embed.setDescription(`\`\`\`js\n${err.stack}\`\`\``)
             embed.addField(t("events:error.report-issue"), t("events:error.server-support"))
 
             message.sendEmbed(embed)
