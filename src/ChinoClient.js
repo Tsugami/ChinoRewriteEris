@@ -10,6 +10,8 @@ class ChinoClient extends ErisClient {
         this.config = require("../config")
         this.database = require("./structures/MongooseDatabase")
         this.player = new Collection()
+        this.MessageCollector = require("./utils/MessageCollector")
+        this.ReactionCollector = require("./utils/ReactionCollector")
     }
 
     loadLavalink(query) {

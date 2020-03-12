@@ -31,18 +31,7 @@ class MessageCreateReceive {
         if (!commands) return
         message.channel.sendTyping()
         if (commands.config.devs && !this.client.config.owners.includes(message.author.id)) return message.reply("chino_shock", t("permissions:ONLY_DEVS"))
-        // if (commands.config.UserPermission !== null) {
-        //     if (!message.member.hasPermission(commands.config.UserPerms)) {
-        //         let perm = commands.config.UserPerms.map(value => t(`permissions:${value}`)).join(", ")
-        //         return message.chinoReply("error", `${t("permissions:USER_MISSING_PERMISSION", { perm: perm })}`)
-        //     }
-        // }
-        // if (commands.config.ClientPerms !== null) {
-        //     if (!message.guild.me.hasPermission(commands.config.ClientPerms) || !message.channel.permissionsFor(this.client.user.id).has(commands.config.ClientPerms)) {
-        //         let perm = clientPermission.map(value => t(`permissions:${value}`)).join(", ")
-        //         return message.chinoReply("error", `${t("permissions:CLIENT_MISSING_PERMISSION", { perm: perm })}`)
-        //     }
-        // }
+        
         commands.run(message, args, server, { t }).catch(err => {
             if (err.stack.length > 1800)`${err.stack.slice(0, 1800)}...`
             const embed = new RichEmbed()
