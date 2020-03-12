@@ -1,0 +1,15 @@
+{
+    "prefix": "",
+    "token": "",
+    "owners": [],
+    "mongoose": "",
+    "clientOptions": {
+        "autoreconnect": true,
+        "disableEveryone": true,
+        "getAllUsers": true,
+        "defaultImageSize": 2048,
+        "firstShardID": 0,
+        "maxShards": "auto",
+        "restMode": true
+    }
+}
