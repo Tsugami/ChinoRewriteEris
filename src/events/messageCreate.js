@@ -8,10 +8,10 @@ class MessageCreateReceive {
     async run(message) {
         if (message.author.bot) return
         if (message.channel.type !== 0) return
-        let server = await this.client.database.guilds.findById(message.channel.guild.id)
+        let server = await this.client.database.guilds.findById(message.guildID)
         if (!server) {
             server = this.client.database.guilds({
-                _id: message.channel.guild.id
+                _id: message.guildID
             })
             server.save()
         }
