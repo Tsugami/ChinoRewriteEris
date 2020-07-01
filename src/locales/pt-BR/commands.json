@@ -1,4 +1,8 @@
 {
+    "missingPermissions" : {
+        "botUser" : "Eu preciso das seguintes permissões para executar esse comando: {{permissions}}",
+        "memberUser" : "Você precisa das seguintes permissões para executar esse comando: {{permissions}}"
+    },
     "ping": "Total de shards: {{totalShard}}",
     "reload": {
         "locales": "locales recarregadas com sucesso!",

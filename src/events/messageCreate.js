@@ -1,5 +1,7 @@
 const i18next = require("i18next")
 const { RichEmbed } = require("chariot.js")
+const { Constants } = require("eris");
+
 class MessageCreateReceive {
     constructor(client) {
         this.client = client
@@ -31,7 +33,47 @@ class MessageCreateReceive {
         if (!commands) return
         message.channel.sendTyping()
         if (commands.config.devs && !this.client.config.owners.includes(message.author.id)) return message.reply("chino_shock", t("permissions:ONLY_DEVS"))
-        
+
+        if (commands.botPerms || commands.userPerms) {
+            let botMissingPerms = []
+            let userMissingPerms = []
+
+            let missingPermsMsg = []
+
+            const botMember = this.client.guilds.get(message.guildID).members.get(this.client.user.id)
+
+            if (commands.botPerms && commands.botPerms instanceof Array) {
+                commands.botPerms.forEach(value => {
+                    if (typeof value == 'string') {
+                        if (Constants.Permissions[value] != undefined && !botMember.permission.has(value)) {
+                            botMissingPerms.push(value)
+                        }
+                    }
+                })
+
+                if (botMissingPerms) missingPermsMsg.push(t("commands:missingCommands.botUser", {
+                    permissions: botMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
+                }))
+            }
+
+            if (commands.userPerms && commands.userPerms instanceof Array) {
+                commands.userPerms.forEach(value => {
+                    if (typeof value == 'string') {
+                        if (Constants.Permissions[value] != undefined && !message.member.permission.has(value)) {
+                            userMissingPerms.push(value)
+                        }
+                    }
+                })
+
+                if (userMissingPerms) missingPermsMsg.push(t("commands:missingCommands.memberUser", {
+                    permissions: userMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
+                }))
+            }
+
+            if (botMissingPerms || userMissingPerms)
+                message.reply("chino_shock", missingPermsMsg.join("\n"))
+        }
+
         commands.run(message, args, server, { t }).catch(err => {
             if (err.stack.length > 1800)`${err.stack.slice(0, 1800)}...`
             const embed = new RichEmbed()
