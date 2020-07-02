@@ -52,7 +52,7 @@ class MessageCreateReceive {
                     }
                 })
 
-                if (botMissingPerms) missingPermsMsg.push(t("commands:missingPermissions.botUser", {
+                if (botMissingPerms.length > 0) missingPermsMsg.push(t("commands:missingPermissions.botUser", {
                     permissions: botMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
                 }))
             }
@@ -66,7 +66,7 @@ class MessageCreateReceive {
                     }
                 })
 
-                if (userMissingPerms) missingPermsMsg.push(t("commands:missingPermissions.memberUser", {
+                if (userMissingPerms.length > 0) missingPermsMsg.push(t("commands:missingPermissions.memberUser", {
                     permissions: userMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
                 }))
             }
