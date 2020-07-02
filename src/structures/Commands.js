@@ -5,8 +5,8 @@ class Commands {
             name: options.name || null,
             aliases: options.aliases || [],
             category: options.category || null,
-            UserPerms: options.UserPerms || null,
-            ClientPerms: options.ClientPerms || null,
+            userPerms: options.userPerms || null,
+            botPerms: options.botPerms || null,
             devs: options.devs || false
         }
     }
