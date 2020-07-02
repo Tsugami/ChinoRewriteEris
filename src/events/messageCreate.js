@@ -51,7 +51,7 @@ class MessageCreateReceive {
                     }
                 })
 
-                if (botMissingPerms) missingPermsMsg.push(t("commands:missingCommands.botUser", {
+                if (botMissingPerms) missingPermsMsg.push(t("commands:missingPermissions.botUser", {
                     permissions: botMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
                 }))
             }
@@ -65,13 +65,13 @@ class MessageCreateReceive {
                     }
                 })
 
-                if (userMissingPerms) missingPermsMsg.push(t("commands:missingCommands.memberUser", {
+                if (userMissingPerms) missingPermsMsg.push(t("commands:missingPermissions.memberUser", {
                     permissions: userMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
                 }))
             }
 
-            if (botMissingPerms || userMissingPerms)
-                message.reply("chino_shock", missingPermsMsg.join("\n"))
+            if (botMissingPerms || userMissingPerms) 
+                return message.reply("chino_shock", missingPermsMsg.join("\n"))
         }
 
         commands.run(message, args, server, { t }).catch(err => {
