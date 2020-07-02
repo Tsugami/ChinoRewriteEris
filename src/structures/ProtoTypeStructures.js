@@ -1,10 +1,10 @@
 const { Message } = require("eris")
-const emotes = require("./EmotesInstance.json")
+const { ChinoReply } = require("../utils")
 
 class ProtoTypeStructures {
     static start(client) {
         Message.prototype.reply = async function reply(emoji, msg) {
-            return client.createMessage(this.channel.id, `${emotes[emoji]} **| ${this.author.username}**, ${msg}`)
+            return client.createMessage(this.channel.id, ChinoReply(emoji, msg, this.author.username))
         }
 
         Message.prototype.sendEmbed = async function reply(msg) {

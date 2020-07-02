@@ -1,6 +1,7 @@
 const i18next = require("i18next")
 const { RichEmbed } = require("chariot.js")
 const { Constants } = require("eris");
+const { ChinoReply } = require("../utils");
 
 class MessageCreateReceive {
     constructor(client) {
@@ -34,16 +35,16 @@ class MessageCreateReceive {
         message.channel.sendTyping()
         if (commands.config.devs && !this.client.config.owners.includes(message.author.id)) return message.reply("chino_shock", t("permissions:ONLY_DEVS"))
 
-        if (commands.botPerms || commands.userPerms) {
+        if (commands.config.botPerms || commands.config.userPerms) {
             let botMissingPerms = []
             let userMissingPerms = []
 
             let missingPermsMsg = []
 
-            const botMember = this.client.guilds.get(message.guildID).members.get(this.client.user.id)
+            const botMember = message.member.guild.members.get(this.client.user.id)
 
-            if (commands.botPerms && commands.botPerms instanceof Array) {
-                commands.botPerms.forEach(value => {
+            if (commands.config.botPerms && commands.config.botPerms instanceof Array) {
+                commands.config.botPerms.forEach(value => {
                     if (typeof value == 'string') {
                         if (Constants.Permissions[value] != undefined && !botMember.permission.has(value)) {
                             botMissingPerms.push(value)
@@ -51,13 +52,13 @@ class MessageCreateReceive {
                     }
                 })
 
-                if (botMissingPerms) missingPermsMsg.push(t("commands:missingCommands.botUser", {
+                if (botMissingPerms.length > 0) missingPermsMsg.push(t("commands:missingPermissions.botUser", {
                     permissions: botMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
                 }))
             }
 
-            if (commands.userPerms && commands.userPerms instanceof Array) {
-                commands.userPerms.forEach(value => {
+            if (commands.config.userPerms && commands.config.userPerms instanceof Array) {
+                commands.config.userPerms.forEach(value => {
                     if (typeof value == 'string') {
                         if (Constants.Permissions[value] != undefined && !message.member.permission.has(value)) {
                             userMissingPerms.push(value)
@@ -65,13 +66,15 @@ class MessageCreateReceive {
                     }
                 })
 
-                if (userMissingPerms) missingPermsMsg.push(t("commands:missingCommands.memberUser", {
+                if (userMissingPerms.length > 0) missingPermsMsg.push(t("commands:missingPermissions.memberUser", {
                     permissions: userMissingPerms.map(value => `\`${t("permissions:discord." + value)}\``).join(', ')
                 }))
             }
 
-            if (botMissingPerms || userMissingPerms)
-                message.reply("chino_shock", missingPermsMsg.join("\n"))
+            if (botMissingPerms.length > 0 || userMissingPerms.length > 0) 
+                return message.channel.createMessage(
+                    missingPermsMsg.map(val => ChinoReply("chino_shock", val)).join("\n")
+                )
         }
 
         commands.run(message, args, server, { t }).catch(err => {
