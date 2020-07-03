@@ -1,11 +1,11 @@
 class ShardPreReadyReceive {
-  constructor (client) {
-    this.client = client
-  }
+    constructor (client) {
+        this.client = client;
+    }
 
-  run (shardId) {
-    console.log(`Starting shard: ${shardId}`)
-  }
+    run (shardId) {
+        console.log(`Starting shard: ${shardId}`);
+    }
 }
 
-module.exports = ShardPreReadyReceive
+module.exports = ShardPreReadyReceive;
