@@ -4,11 +4,11 @@ const { Constants } = require("eris");
 const { ChinoReply } = require("../utils");
 
 class MessageCreateReceive {
-    constructor (client) {
+    constructor(client) {
         this.client = client;
     }
 
-    async run (message) {
+    async run(message) {
         if (message.author.bot) return;
         if (message.channel.type !== 0) return;
         let server = await this.client.database.guilds.findById(message.guildID);
@@ -19,7 +19,7 @@ class MessageCreateReceive {
             server.save();
         }
         let t;
-        const setFixedT = function (translate) {
+        const setFixedT = function(translate) {
             t = translate;
         };
 

@@ -1,11 +1,11 @@
 const LavalinkPlayer = require("../lavalink/LavalinkPlayer");
 const LavalinkManager = require("../lavalink/LavalinkManager");
 class InicializeLavalink {
-    constructor (client) {
+    constructor(client) {
         this.client = client;
     }
 
-    load () {
+    load() {
         this.client.lavalinkManager = new LavalinkManager(this.client);
         this.client.lavalinkPlayer = new LavalinkPlayer(this.client);
 

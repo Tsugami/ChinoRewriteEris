@@ -1,7 +1,7 @@
 const Command = require("../../structures/Commands");
 
 class ReloadCommand extends Command {
-    constructor (client) {
+    constructor(client) {
         super(client, {
             name: "reload",
             aliases: [],
@@ -10,7 +10,7 @@ class ReloadCommand extends Command {
         });
     }
 
-    async run (message, args, server, { t }) {
+    async run(message, args, server, { t }) {
         switch (args[0].toLowerCase()) {
         case "locales":
             this.client.loadLocales();

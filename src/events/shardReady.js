@@ -1,9 +1,9 @@
 class ShardReadyReceive {
-    constructor (client) {
+    constructor(client) {
         this.client = client;
     }
 
-    run (shardId) {
+    run(shardId) {
         console.log(`Shard: ${shardId} is ready`);
     }
 }

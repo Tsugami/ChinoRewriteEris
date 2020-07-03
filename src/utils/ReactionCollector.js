@@ -1,7 +1,7 @@
 const { EventEmitter } = require("events");
 
 class ReactionCollector extends EventEmitter {
-    constructor (message, filter, options = {}) {
+    constructor(message, filter, options = {}) {
         super();
 
         this.message = message;
@@ -18,19 +18,19 @@ class ReactionCollector extends EventEmitter {
         this.initializeListeners();
     }
 
-    initializeListeners () {
+    initializeListeners() {
         setTimeout(() => this.stopListeners("timeEnded"), this.options.time);
         this.client.on("messageReactionAdd", this.verify);
     }
 
-    stopListeners (reason = null) {
+    stopListeners(reason = null) {
         if (this.isEnded) return;
         this.client.removeListener("messageReactionAdd", this.verify);
         this.isEnded = true;
         return this.emit("end", reason);
     }
 
-    async verify (message, emoji, userid) {
+    async verify(message, emoji, userid) {
         if (this.message.id !== message.id) return null;
         const user = await this.client.users.get(userid);
         if (this.filter(emoji, user)) {

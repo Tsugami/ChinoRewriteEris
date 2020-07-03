@@ -1,9 +1,9 @@
 class ReadyReveice {
-    constructor (client) {
+    constructor(client) {
         this.client = client;
     }
 
-    run () {
+    run() {
         const game = [
             {
                 name: "Tokimeki Poporon",

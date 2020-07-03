@@ -1,7 +1,7 @@
 const { RichEmbed } = require("chariot.js");
 const Command = require("../../structures/Commands");
 class PingCommand extends Command {
-    constructor (client) {
+    constructor(client) {
         super(client, {
             name: "ping",
             aliases: [],
@@ -9,7 +9,7 @@ class PingCommand extends Command {
         });
     }
 
-    async run (message, args, server, { t }) {
+    async run(message, args, server, { t }) {
         switch (args[0]) {
         case "shards": {
             const s = [];

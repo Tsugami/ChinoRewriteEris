@@ -1,6 +1,6 @@
 const { EventEmitter } = require("events");
 class LavalinkPlayer extends EventEmitter {
-    constructor (player) {
+    constructor(player) {
         super();
         this.player = player;
         this.queue = [];
@@ -9,7 +9,7 @@ class LavalinkPlayer extends EventEmitter {
         this.repeat = false;
     }
 
-    play (query) {
+    play(query) {
         return getSongs(this.player.node, `ytsearch:${query}`).then(song => {
             if (!song[0]) return null;
             this._addToQueue(song[0]);
@@ -17,7 +17,7 @@ class LavalinkPlayer extends EventEmitter {
         });
     }
 
-    skip () {
+    skip() {
         const nextSong = this.queue.shift();
         if (!nextSong) return;
         this.player.play(nextSong.track);
@@ -25,24 +25,24 @@ class LavalinkPlayer extends EventEmitter {
         this.repeatTrack = nextSong.track;
     }
 
-    setVolume (volume) {
+    setVolume(volume) {
         if (volume > 100) volume = 100;
         return this.player.volume(volume);
     }
 
-    seek (position) {
+    seek(position) {
         return this.player.seek(position);
     }
 
-    pause () {
+    pause() {
         return this.player.paused ? this.player.resume() : this.player.pause();
     }
 
-    shuffle () {
+    shuffle() {
         return this.queue.sort(() => Math.random() > 0.5 ? -1 : 1);
     }
 
-    _addToQueue (track) {
+    _addToQueue(track) {
         if (!this.player.playing && !this.player.paused) {
             return this._play(track);
         }
@@ -50,7 +50,7 @@ class LavalinkPlayer extends EventEmitter {
         return this.queue.push(track);
     }
 
-    _play (song) {
+    _play(song) {
         this.player.on("end", (data) => {
             if (data.reason === "REPLACED") return;
             if (this.repeat) {
@@ -71,7 +71,7 @@ class LavalinkPlayer extends EventEmitter {
 
 module.exports = LavalinkPlayer;
 
-async function getSongs (node, search) {
+async function getSongs(node, search) {
     const fetch = require("node-fetch");
     const { URLSearchParams } = require("url");
     const params = new URLSearchParams();

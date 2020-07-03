@@ -1,7 +1,7 @@
 const Command = require("../../structures/Commands");
 const { RichEmbed } = require("chariot.js");
 class EvalCommand extends Command {
-    constructor (client) {
+    constructor(client) {
         super(client, {
             name: "eval",
             aliases: ["ev"],
@@ -10,7 +10,7 @@ class EvalCommand extends Command {
         });
     }
 
-    async run (message, args, server, { t }) {
+    async run(message, args, server, { t }) {
         try {
             const util = require("util");
             // eslint-disable-next-line no-eval

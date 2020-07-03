@@ -1,7 +1,7 @@
 const { EventEmitter } = require("events");
 
 class MessageCollector extends EventEmitter {
-    constructor (channel, filter, options = {}) {
+    constructor(channel, filter, options = {}) {
         super();
 
         this.channel = channel;
@@ -17,17 +17,17 @@ class MessageCollector extends EventEmitter {
         this.initializeListeners();
     }
 
-    initializeListeners () {
+    initializeListeners() {
         setTimeout(() => this.stopListeners("timeEnded"), this.options.time);
         this.client.on("messageCreate", this.verify);
     }
 
-    stopListeners (reason = null) {
+    stopListeners(reason = null) {
         this.client.removeListener("messageCreate", this.verify);
         return this.emit("end", reason);
     }
 
-    verify (message) {
+    verify(message) {
         if (this.channel.id !== message.channel.id) return null;
         if (this.filter(message)) {
             if (message.author.bot) return;

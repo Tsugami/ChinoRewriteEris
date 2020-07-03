@@ -10,7 +10,7 @@ nodes = nodes.map(node => {
 });
 
 class LavalinkManager {
-    constructor (client) {
+    constructor(client) {
         this.client = client;
         this.manager = new PlayerManager(client, nodes, {
             numShards: this.client.shards.size,
@@ -18,11 +18,11 @@ class LavalinkManager {
         });
     }
 
-    getBestHost () {
+    getBestHost() {
         return this.manager.nodes.get(nodes[0].host);
     }
 
-    async join (channel, guild) {
+    async join(channel, guild) {
         return new LavalinkPlayer(await this.manager.join(this.client.guilds.get(guild).id, channel));
     }
 }

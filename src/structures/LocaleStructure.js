@@ -3,13 +3,13 @@ const i18next = require("i18next");
 const translationBackend = require("i18next-node-fs-backend");
 
 class LocaleStructure {
-    constructor (client) {
+    constructor(client) {
         this.client = client;
         this.languages = ["pt-BR", "en-US"];
         this.ns = ["commands", "events", "permissions"];
     }
 
-    load () {
+    load() {
         try {
             this.startLocales();
             console.log("Locales loaded!");
@@ -19,7 +19,7 @@ class LocaleStructure {
         }
     }
 
-    async startLocales () {
+    async startLocales() {
         try {
             i18next.use(translationBackend).init({
                 ns: this.ns,

@@ -1,5 +1,5 @@
 class Commands {
-    constructor (client, options) {
+    constructor(client, options) {
         this.client = client;
         this.config = {
             name: options.name || null,

@@ -2,7 +2,7 @@ const { Client: ErisClient, Collection } = require("eris");
 const { readdir } = require("fs");
 
 class ChinoClient extends ErisClient {
-    constructor (token, options = {}) {
+    constructor(token, options = {}) {
         super(token, options);
         this.aliases = new Collection();
         this.commands = new Collection();
@@ -13,20 +13,20 @@ class ChinoClient extends ErisClient {
         this.CollectorUtils = require("./utils/index");
     }
 
-    loadLavalink (query) {
+    loadLavalink(query) {
         const Lavalink = require("./structures/InicializeLavalink");
         const lavalink = new Lavalink(query);
         lavalink.load();
         console.log("Loaded lavalink!");
     }
 
-    loadLocales () {
+    loadLocales() {
         const Locales = require("./structures/LocaleStructure");
         const locales = new Locales(this);
         locales.load();
     }
 
-    loadCommands () {
+    loadCommands() {
         readdir(`${__dirname}/commands`, (err, f) => {
             if (err) return console.error(err);
             f.forEach(category => {
@@ -45,7 +45,7 @@ class ChinoClient extends ErisClient {
         return this;
     }
 
-    loadEvents () {
+    loadEvents() {
         readdir(`${__dirname}/events`, (err, f) => {
             if (err) return console.error(err);
             f.forEach(files => {
@@ -57,7 +57,7 @@ class ChinoClient extends ErisClient {
         return this;
     }
 
-    connect () {
+    connect() {
         return super.connect();
     }
 }
